@@ -1,14 +1,14 @@
 package com.joaolucas.schooljj.models.entities;
 
 import com.joaolucas.schooljj.models.enums.Genero;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.*;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+@Entity
+@DiscriminatorValue("Aluno")
 public class Aluno extends User {
 
     @ManyToOne
