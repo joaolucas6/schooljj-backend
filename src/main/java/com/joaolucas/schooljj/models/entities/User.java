@@ -8,6 +8,8 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "tb_user")
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "tipo_user")
 public class User {
 
     @Id
@@ -42,7 +44,8 @@ public class User {
 
     }
 
-    public User(String nome, String sobrenome, String email, String senha, Genero genero, String cpf, LocalDate dataNascimento, String numeroTelefone) {
+    public User(Long id, String nome, String sobrenome, String email, String senha, Genero genero, String cpf, LocalDate dataNascimento, String numeroTelefone) {
+        this.id = id;
         this.nome = nome;
         this.sobrenome = sobrenome;
         this.email = email;
@@ -51,6 +54,14 @@ public class User {
         this.cpf = cpf;
         this.dataNascimento = dataNascimento;
         this.numeroTelefone = numeroTelefone;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getNome() {
