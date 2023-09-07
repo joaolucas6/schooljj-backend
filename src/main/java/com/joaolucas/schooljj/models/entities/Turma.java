@@ -28,6 +28,9 @@ public class Turma {
     @OneToMany(mappedBy = "turma")
     private List<Aluno> alunos = new ArrayList<>();
 
+    @OneToMany(mappedBy = "turma")
+    private List<Tarefa> tarefas = new ArrayList<>();
+
     public Turma(){
 
     }
@@ -35,6 +38,14 @@ public class Turma {
     public Turma(Long id, String nome) {
         this.id = id;
         this.nome = nome;
+    }
+
+    public List<Tarefa> getTarefas() {
+        return tarefas;
+    }
+
+    public void setTarefas(List<Tarefa> tarefas) {
+        this.tarefas = tarefas;
     }
 
     public Long getId() {
@@ -89,6 +100,7 @@ public class Turma {
                 ", nome='" + nome + '\'' +
                 ", professores=" + professores +
                 ", alunos=" + alunos +
+                ", tarefas=" + tarefas +
                 '}';
     }
 }
