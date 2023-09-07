@@ -16,9 +16,8 @@ public class Nota {
     @Column(name = "nota")
     private Double nota;
 
-    @ManyToOne
-    @JoinColumn(name = "tarefa_id")
-    private Tarefa tarefa;
+    @OneToOne(mappedBy = "nota")
+    private Resposta resposta;
 
     @ManyToOne
     @JoinColumn(name = "professor_id")
@@ -34,10 +33,10 @@ public class Nota {
 
     }
 
-    public Nota(Long id, Double nota, Tarefa tarefa, Professor professor, String observacoes, LocalDateTime dataCriacao) {
+    public Nota(Long id, Resposta resposta, Double nota, Tarefa tarefa, Professor professor, String observacoes, LocalDateTime dataCriacao) {
         this.id = id;
+        this.resposta = resposta;
         this.nota = nota;
-        this.tarefa = tarefa;
         this.professor = professor;
         this.observacoes = observacoes;
         this.dataCriacao = dataCriacao;
@@ -51,20 +50,20 @@ public class Nota {
         this.id = id;
     }
 
+    public Resposta getResposta() {
+        return resposta;
+    }
+
+    public void setResposta(Resposta resposta) {
+        this.resposta = resposta;
+    }
+
     public Double getNota() {
         return nota;
     }
 
     public void setNota(Double nota) {
         this.nota = nota;
-    }
-
-    public Tarefa getTarefa() {
-        return tarefa;
-    }
-
-    public void setTarefa(Tarefa tarefa) {
-        this.tarefa = tarefa;
     }
 
     public Professor getProfessor() {
@@ -109,7 +108,7 @@ public class Nota {
         return "Nota{" +
                 "id=" + id +
                 ", nota=" + nota +
-                ", tarefa=" + tarefa +
+                ", resposta=" + resposta +
                 ", professor=" + professor +
                 ", observacoes='" + observacoes + '\'' +
                 ", dataCriacao=" + dataCriacao +

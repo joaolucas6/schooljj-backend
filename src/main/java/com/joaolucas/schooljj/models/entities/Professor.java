@@ -15,10 +15,10 @@ import java.util.List;
 @DiscriminatorValue("Professor")
 public class Professor extends User {
 
-    @ManyToMany
+    @ManyToMany(mappedBy = "professores")
     private List<Disciplina> disciplinas = new ArrayList<>();
 
-    @ManyToMany
+    @ManyToMany(mappedBy = "professores")
     private List<Turma> turmas = new ArrayList<>();
 
     @OneToMany(mappedBy = "professor")

@@ -20,6 +20,7 @@ public class Resposta {
     private Tarefa tarefa;
 
     @OneToOne
+    @JoinColumn(name = "nota_id")
     private Nota nota;
 
     @ManyToOne
