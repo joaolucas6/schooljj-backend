@@ -82,5 +82,5 @@ public class RespostaService {
         resposta.getImagensUrl().remove(imageUrl);
         respostaRepository.save(resposta);
     }
-    
+
 }
