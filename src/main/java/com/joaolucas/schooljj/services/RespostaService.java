@@ -32,11 +32,11 @@ public class RespostaService {
         return new RespostaDTO(respostaRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Resposta não foi encontrada com ID: " + id)));
     }
 
-    public RespostaDTO create(RespostaDTO respostaDTO, Long tarefaId, Long alunoId){
+    public RespostaDTO create(RespostaDTO respostaDTO){
         if(!DataValidation.isRespostaDataValid(respostaDTO)) throw new BadRequestException("Os dados da resposta são inválidos");
 
-        Tarefa tarefa = tarefaRepository.findById(tarefaId).orElseThrow(() -> new ResourceNotFoundException("Tarefa não foi encontrada com ID: " + tarefaId));
-        Aluno aluno = alunoRepository.findById(alunoId).orElseThrow(() -> new ResourceNotFoundException("Aluno não foi encontrado com ID: " + alunoId));
+        Tarefa tarefa = tarefaRepository.findById(respostaDTO.getTarefaId()).orElseThrow(() -> new ResourceNotFoundException("Tarefa não foi encontrada com ID: " + respostaDTO.getTarefaId()));
+        Aluno aluno = alunoRepository.findById(respostaDTO.getAlunoId()).orElseThrow(() -> new ResourceNotFoundException("Aluno não foi encontrado com ID: " + respostaDTO.getAlunoId()));
 
         Resposta resposta = new Resposta();
 

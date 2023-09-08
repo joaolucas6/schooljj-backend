@@ -32,9 +32,11 @@ public class NotaService {
         return new NotaDTO(notaRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Nota não foi encontrada com ID: " + id)));
     }
 
-    public NotaDTO create(NotaDTO notaDTO, Long respostaId, Long professorId){
-        Resposta resposta = respostaRepository.findById(respostaId).orElseThrow(() -> new ResourceNotFoundException("Resposta não foi encontrada com ID: " + respostaId));
-        Professor professor = professorRepository.findById(professorId).orElseThrow(() -> new ResourceNotFoundException("Professor não foi encontrado com ID: " + professorId));
+    public NotaDTO create(NotaDTO notaDTO){
+        if(!DataValidation.isNotaDataValid(notaDTO)) throw new BadRequestException("Os dados da nota são inválidos");
+
+        Resposta resposta = respostaRepository.findById(notaDTO.getRespostaId()).orElseThrow(() -> new ResourceNotFoundException("Resposta não foi encontrada com ID: " + notaDTO.getRespostaId()));
+        Professor professor = professorRepository.findById(notaDTO.getProfessorId()).orElseThrow(() -> new ResourceNotFoundException("Professor não foi encontrado com ID: " + notaDTO.getProfessorId()));
 
         Nota nota = new Nota();
 
@@ -56,7 +58,7 @@ public class NotaService {
     }
 
     public NotaDTO update(Long id, NotaDTO notaDTO){
-        if(DataValidation.isNotaDataValid(notaDTO)) throw new BadRequestException("Os dados da nota são inválidos.");
+        if(!DataValidation.isNotaDataValid(notaDTO)) throw new BadRequestException("Os dados da nota são inválidos.");
 
         Nota nota = notaRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Nota não foi encontrada com ID: " + id));
         if(notaDTO.getNota() != null) nota.setNota(notaDTO.getNota());
