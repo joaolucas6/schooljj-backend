@@ -26,7 +26,7 @@ public class AlunoService {
     }
 
     public AlunoDTO update(Long id, AlunoDTO alunoDTO){
-        if(!DataValidation.isUserDataValid(alunoDTO)) throw new BadRequestException("Os dados do usuário são inválidos!");
+        if(!DataValidation.isUserDataValid(alunoDTO)) throw new BadRequestException("Os dados do aluno são inválidos.");
         Aluno aluno = alunoRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Aluno não foi encontrado com ID: " + id));
 
         if(alunoDTO.getNome() != null) aluno.setNome(alunoDTO.getNome());
@@ -34,6 +34,7 @@ public class AlunoService {
         if(alunoDTO.getEmail() != null) aluno.setEmail(alunoDTO.getEmail());
         if(alunoDTO.getGenero() != null) aluno.setGenero(alunoDTO.getGenero());
         if(alunoDTO.getCpf() != null) aluno.setCpf(alunoDTO.getCpf());
+        if(alunoDTO.getDataNascimento() != null) aluno.setDataNascimento(aluno.getDataNascimento());
         if(alunoDTO.getNumeroTelefone() != null) aluno.setNumeroTelefone(alunoDTO.getNumeroTelefone());
 
         return new AlunoDTO(alunoRepository.save(aluno));
@@ -43,5 +44,5 @@ public class AlunoService {
         Aluno aluno = alunoRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Aluno não foi encontrado com ID: " + id));
         alunoRepository.delete(aluno);
     }
-    
+
 }
