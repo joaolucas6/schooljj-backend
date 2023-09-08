@@ -40,4 +40,16 @@ public class DisciplinaController {
         disciplinaService.deletar(id);
         return ResponseEntity.ok().build();
     }
+
+    @PostMapping("/{disciplinaId}/professores")
+    public ResponseEntity<Void> adicionarProfessor(Long disciplinaId, Long professorId){
+        disciplinaService.adicionarProfessor(disciplinaId, professorId);
+        return ResponseEntity.ok().build();
+    }
+
+    @DeleteMapping("/{disciplinaId}/professores")
+    public ResponseEntity<Void> removerProfessor(Long disciplinaId, Long professorId){
+        disciplinaService.removerProfessor(disciplinaId, professorId);
+        return ResponseEntity.ok().build();
+    }
 }
