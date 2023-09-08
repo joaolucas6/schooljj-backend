@@ -17,15 +17,15 @@ public class ProfessorService {
 
     private final ProfessorRepository professorRepository;
 
-    public List<ProfessorDTO> findAll(){
+    public List<ProfessorDTO> retornarTodos(){
         return professorRepository.findAll().stream().map(ProfessorDTO::new).toList();
     }
 
-    public ProfessorDTO findById(Long id){
+    public ProfessorDTO retornarPorId(Long id){
         return new ProfessorDTO(professorRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Professor não foi encontrado com ID: " + id)));
     }
 
-    public ProfessorDTO update(Long id, ProfessorDTO professorDTO){
+    public ProfessorDTO atualizar(Long id, ProfessorDTO professorDTO){
         if(!DataValidation.isUserDataValid(professorDTO)) throw new BadRequestException("Os dados do professor são inválidos.");
         Professor professor = professorRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Professor não foi encontrado com ID: " + id));
 
@@ -40,7 +40,7 @@ public class ProfessorService {
         return new ProfessorDTO(professorRepository.save(professor));
     }
 
-    public void delete(Long id){
+    public void deletar(Long id){
         Professor professor = professorRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Professor não foi encontrado com ID: " + id));
         professorRepository.delete(professor);
     }

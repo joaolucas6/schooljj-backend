@@ -24,15 +24,15 @@ public class TurmaService {
     private final AlunoRepository alunoRepository;
     private final ProfessorRepository professorRepository;
 
-    public List<TurmaDTO> findAll(){
+    public List<TurmaDTO> retornarTodos(){
         return turmaRepository.findAll().stream().map(TurmaDTO::new).toList();
     }
 
-    public TurmaDTO findById(Long id){
+    public TurmaDTO retornarPorId(Long id){
         return new TurmaDTO(turmaRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Turma não foi encontrada com ID: " + id)));
     }
 
-    public TurmaDTO create(TurmaDTO turmaDTO){
+    public TurmaDTO criar(TurmaDTO turmaDTO){
         if(!DataValidation.isTurmaDataValid(turmaDTO)) throw new BadRequestException("Dados da turma são inválidos.");
 
         Turma turma = new Turma();
@@ -41,7 +41,7 @@ public class TurmaService {
         return new TurmaDTO(turmaRepository.save(turma));
     }
 
-    public TurmaDTO update(Long id, TurmaDTO turmaDTO){
+    public TurmaDTO atualizar(Long id, TurmaDTO turmaDTO){
         if(!DataValidation.isTurmaDataValid(turmaDTO)) throw new BadRequestException("Dados da turma são inválidos.");
 
         Turma turma = turmaRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Turma não foi encontrada com ID: " + id));
@@ -51,7 +51,7 @@ public class TurmaService {
         return new TurmaDTO(turmaRepository.save(turma));
     }
 
-    public void delete(Long id){
+    public void deletar(Long id){
         Turma turma = turmaRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Turma não foi encontrada com ID: " + id));
         turmaRepository.delete(turma);
     }
@@ -59,6 +59,8 @@ public class TurmaService {
     public void transferirAluno(Long alunoId, Long turmaId){
         Turma turma = turmaRepository.findById(turmaId).orElseThrow(() -> new ResourceNotFoundException("Turma não foi encontrada com ID: " + turmaId));
         Aluno aluno = alunoRepository.findById(alunoId).orElseThrow(() -> new ResourceNotFoundException("Aluno não foi encontrado com ID: "+ alunoId));
+
+
         Turma antigaTurma = aluno.getTurma();
 
         antigaTurma.getAlunos().remove(aluno);

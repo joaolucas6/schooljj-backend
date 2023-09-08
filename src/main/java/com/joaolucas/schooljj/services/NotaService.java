@@ -24,15 +24,15 @@ public class NotaService {
     private final RespostaRepository respostaRepository;
     private final ProfessorRepository professorRepository;
 
-    public List<NotaDTO> findAll(){
+    public List<NotaDTO> retornarTodos(){
         return notaRepository.findAll().stream().map(NotaDTO::new).toList();
     }
 
-    public NotaDTO findById(Long id){
+    public NotaDTO retornarPorId(Long id){
         return new NotaDTO(notaRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Nota não foi encontrada com ID: " + id)));
     }
 
-    public NotaDTO create(NotaDTO notaDTO){
+    public NotaDTO criar(NotaDTO notaDTO){
         if(!DataValidation.isNotaDataValid(notaDTO)) throw new BadRequestException("Os dados da nota são inválidos");
 
         Resposta resposta = respostaRepository.findById(notaDTO.getRespostaId()).orElseThrow(() -> new ResourceNotFoundException("Resposta não foi encontrada com ID: " + notaDTO.getRespostaId()));
@@ -57,7 +57,7 @@ public class NotaService {
         return new NotaDTO(savedNota);
     }
 
-    public NotaDTO update(Long id, NotaDTO notaDTO){
+    public NotaDTO atualizar(Long id, NotaDTO notaDTO){
         if(!DataValidation.isNotaDataValid(notaDTO)) throw new BadRequestException("Os dados da nota são inválidos.");
 
         Nota nota = notaRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Nota não foi encontrada com ID: " + id));
@@ -67,7 +67,7 @@ public class NotaService {
         return new NotaDTO(notaRepository.save(nota));
     }
 
-    public void delete(Long id){
+    public void deletar(Long id){
         Nota nota = notaRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Nota não foi encontrada com ID: " + id));
         notaRepository.delete(nota);
     }

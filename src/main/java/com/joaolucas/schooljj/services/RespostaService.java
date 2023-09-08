@@ -24,15 +24,15 @@ public class RespostaService {
     private final TarefaRepository tarefaRepository;
     private final AlunoRepository alunoRepository;
 
-    public List<RespostaDTO> findAll(){
+    public List<RespostaDTO> retornarTodos(){
         return respostaRepository.findAll().stream().map(RespostaDTO::new).toList();
     }
 
-    public RespostaDTO findById(Long id){
+    public RespostaDTO retornarPorId(Long id){
         return new RespostaDTO(respostaRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Resposta não foi encontrada com ID: " + id)));
     }
 
-    public RespostaDTO create(RespostaDTO respostaDTO){
+    public RespostaDTO criar(RespostaDTO respostaDTO){
         if(!DataValidation.isRespostaDataValid(respostaDTO)) throw new BadRequestException("Os dados da resposta são inválidos");
 
         Tarefa tarefa = tarefaRepository.findById(respostaDTO.getTarefaId()).orElseThrow(() -> new ResourceNotFoundException("Tarefa não foi encontrada com ID: " + respostaDTO.getTarefaId()));
@@ -57,7 +57,7 @@ public class RespostaService {
         return new RespostaDTO(savedResposta);
     }
 
-    public RespostaDTO update(Long id, RespostaDTO respostaDTO){
+    public RespostaDTO atualizar(Long id, RespostaDTO respostaDTO){
         if(!DataValidation.isRespostaDataValid(respostaDTO)) throw new BadRequestException("Os dados da resposta são inválidos");
         Resposta resposta = respostaRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Resposta não foi encontrada com ID: " + id));
 
@@ -66,18 +66,18 @@ public class RespostaService {
         return new RespostaDTO(respostaRepository.save(resposta));
     }
 
-    public void delete(Long id){
+    public void deletar(Long id){
         Resposta resposta = respostaRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Resposta não foi encontrada com ID: " + id));
         respostaRepository.delete(resposta);
     }
 
-    public void addImage(Long respostaId, String imageUrl){
+    public void adicionarImagem(Long respostaId, String imageUrl){
         Resposta resposta = respostaRepository.findById(respostaId).orElseThrow(() -> new ResourceNotFoundException("Resposta não foi encontrada com ID: " + respostaId));
         resposta.getImagensUrl().add(imageUrl);
         respostaRepository.save(resposta);
     }
 
-    public void removeImage(Long respostaId, String imageUrl){
+    public void removerImagem(Long respostaId, String imageUrl){
         Resposta resposta = respostaRepository.findById(respostaId).orElseThrow(() -> new ResourceNotFoundException("Resposta não foi encontrada com ID: " + respostaId));
         resposta.getImagensUrl().remove(imageUrl);
         respostaRepository.save(resposta);

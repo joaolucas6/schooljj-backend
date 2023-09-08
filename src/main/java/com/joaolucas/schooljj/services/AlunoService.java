@@ -17,15 +17,15 @@ public class AlunoService {
 
     private final AlunoRepository alunoRepository;
 
-    public List<AlunoDTO> findAll(){
+    public List<AlunoDTO> retornarTodos(){
         return alunoRepository.findAll().stream().map(AlunoDTO::new).toList();
     }
 
-    public AlunoDTO findById(Long id){
+    public AlunoDTO retornarPorId(Long id){
         return new AlunoDTO(alunoRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Aluno não foi encontrado com ID: " + id)));
     }
 
-    public AlunoDTO update(Long id, AlunoDTO alunoDTO){
+    public AlunoDTO atualizar(Long id, AlunoDTO alunoDTO){
         if(!DataValidation.isUserDataValid(alunoDTO)) throw new BadRequestException("Os dados do aluno são inválidos.");
         Aluno aluno = alunoRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Aluno não foi encontrado com ID: " + id));
 
@@ -40,7 +40,7 @@ public class AlunoService {
         return new AlunoDTO(alunoRepository.save(aluno));
     }
 
-    public void delete(Long id){
+    public void deletar(Long id){
         Aluno aluno = alunoRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Aluno não foi encontrado com ID: " + id));
         alunoRepository.delete(aluno);
     }

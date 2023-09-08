@@ -17,15 +17,15 @@ public class DisciplinaService {
 
     private final DisciplinaRepository disciplinaRepository;
 
-    public List<DisciplinaDTO> findAll(){
+    public List<DisciplinaDTO> retornarTodos(){
         return disciplinaRepository.findAll().stream().map(DisciplinaDTO::new).toList();
     }
 
-    public DisciplinaDTO findById(Long id){
+    public DisciplinaDTO retornarPorId(Long id){
         return new DisciplinaDTO(disciplinaRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Disciplina não foi encontrada com ID: " + id)));
     }
 
-    public DisciplinaDTO create(DisciplinaDTO disciplinaDTO){
+    public DisciplinaDTO criar(DisciplinaDTO disciplinaDTO){
         if(!DataValidation.isDisciplinaDataValid(disciplinaDTO)) throw new BadRequestException("Os dados da disciplina são inválidos.");
         Disciplina disciplina = new Disciplina();
         disciplina.setNome(disciplinaDTO.getNome());
@@ -33,7 +33,7 @@ public class DisciplinaService {
         return new DisciplinaDTO(disciplinaRepository.save(disciplina));
     }
 
-    public DisciplinaDTO update(Long id, DisciplinaDTO disciplinaDTO){
+    public DisciplinaDTO atualizar(Long id, DisciplinaDTO disciplinaDTO){
         if(!DataValidation.isDisciplinaDataValid(disciplinaDTO)) throw new BadRequestException("Os dados da disciplina são inválidos.");
         Disciplina disciplina = disciplinaRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Disciplina não foi encontrada com ID: " + id));
 
@@ -43,7 +43,7 @@ public class DisciplinaService {
         return new DisciplinaDTO(disciplinaRepository.save(disciplina));
     }
 
-    public void delete(Long id){
+    public void deletar(Long id){
         Disciplina disciplina = disciplinaRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Disciplina não foi encontrada com ID: " + id));
         disciplinaRepository.delete(disciplina);
     }

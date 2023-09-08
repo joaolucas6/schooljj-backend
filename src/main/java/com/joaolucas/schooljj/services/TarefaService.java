@@ -27,15 +27,15 @@ public class TarefaService {
     private final ProfessorRepository professorRepository;
     private final TurmaRepository turmaRepository;
 
-    public List<TarefaDTO> findAll(){
+    public List<TarefaDTO> retornarTodos(){
         return tarefaRepository.findAll().stream().map(TarefaDTO::new).toList();
     }
 
-    public TarefaDTO findById(Long id){
+    public TarefaDTO retornarPorId(Long id){
         return new TarefaDTO(tarefaRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Tarefa não foi encontrada com ID: " + id)));
     }
 
-    public TarefaDTO create(TarefaDTO tarefaDTO){
+    public TarefaDTO criar(TarefaDTO tarefaDTO){
         if(!DataValidation.isTarefaDataValid(tarefaDTO)) throw new BadRequestException("Dados da tarefa são inválidos.");
         Disciplina disciplina = disciplinaRepository.findById(tarefaDTO.getDisciplinaId()).orElseThrow(() -> new ResourceNotFoundException("Disciplina não foi encontrada com ID: " + tarefaDTO.getDisciplinaId()));
         Professor professor = professorRepository.findById(tarefaDTO.getProfessorId()).orElseThrow(() -> new ResourceNotFoundException("Professor não foi encontrado com ID: " + tarefaDTO.getProfessorId()));
@@ -64,7 +64,7 @@ public class TarefaService {
         return new TarefaDTO(savedTarefa);
     }
 
-    public TarefaDTO update(Long id, TarefaDTO tarefaDTO){
+    public TarefaDTO atualizar(Long id, TarefaDTO tarefaDTO){
         if(!DataValidation.isTarefaDataValid(tarefaDTO)) throw new BadRequestException("Dados da tarefa são inválidos.");
 
         Tarefa tarefa = tarefaRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Tarefa não foi encontrada com ID: " + id));
@@ -77,7 +77,7 @@ public class TarefaService {
         return new TarefaDTO(tarefaRepository.save(tarefa));
     }
 
-    public void delete(Long id){
+    public void deletar(Long id){
         Tarefa tarefa = tarefaRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Tarefa não foi encontrada com ID: " + id));
         tarefaRepository.delete(tarefa);
     }
