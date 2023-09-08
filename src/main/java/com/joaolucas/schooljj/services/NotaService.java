@@ -44,13 +44,15 @@ public class NotaService {
         nota.setObservacoes(notaDTO.getObservacoes());
         nota.setDataCriacao(LocalDateTime.now());
 
-        resposta.setNota(nota);
-        professor.getNotas().add(nota);
+        Nota savedNota = notaRepository.save(nota);
+
+        resposta.setNota(savedNota);
+        professor.getNotas().add(savedNota);
 
         respostaRepository.save(resposta);
         professorRepository.save(professor);
 
-        return new NotaDTO(notaRepository.save(nota));
+        return new NotaDTO(savedNota);
     }
 
     public NotaDTO update(Long id, NotaDTO notaDTO){
