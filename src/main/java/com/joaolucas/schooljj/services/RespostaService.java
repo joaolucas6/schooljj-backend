@@ -49,7 +49,7 @@ public class RespostaService {
         Resposta savedResposta = respostaRepository.save(resposta);
 
         aluno.getRespostas().add(savedResposta);
-        // tarefa.getRespostas().add(savedResposta);
+        tarefa.getRespostas().add(savedResposta);
 
         alunoRepository.save(aluno);
         tarefaRepository.save(tarefa);

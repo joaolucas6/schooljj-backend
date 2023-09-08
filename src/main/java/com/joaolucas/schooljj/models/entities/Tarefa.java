@@ -3,6 +3,8 @@ package com.joaolucas.schooljj.models.entities;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -37,11 +39,17 @@ public class Tarefa {
     @Column(name = "fim")
     private LocalDateTime fim;
 
+    @Column(name = "criado_em")
+    private LocalDateTime criadoEm;
+
+    @OneToMany(mappedBy = "tarefa")
+    private List<Resposta> respostas = new ArrayList<>();
+
     public Tarefa(){
 
     }
 
-    public Tarefa(Long id, Professor professor, Disciplina disciplina, Turma turma, String titulo, String proposta, LocalDateTime inicio, LocalDateTime fim) {
+    public Tarefa(Long id, Professor professor, Disciplina disciplina, Turma turma, String titulo, String proposta, LocalDateTime inicio, LocalDateTime fim, LocalDateTime criadoEm) {
         this.id = id;
         this.professor = professor;
         this.disciplina = disciplina;
@@ -50,6 +58,7 @@ public class Tarefa {
         this.proposta = proposta;
         this.inicio = inicio;
         this.fim = fim;
+        this.criadoEm = criadoEm;
     }
 
     public Long getId() {
@@ -116,6 +125,22 @@ public class Tarefa {
         this.fim = fim;
     }
 
+    public List<Resposta> getRespostas() {
+        return respostas;
+    }
+
+    public void setRespostas(List<Resposta> respostas) {
+        this.respostas = respostas;
+    }
+
+    public LocalDateTime getCriadoEm() {
+        return criadoEm;
+    }
+
+    public void setCriadoEm(LocalDateTime criadoEm) {
+        this.criadoEm = criadoEm;
+    }
+
     @Override
     public boolean equals(Object object) {
         if (this == object) return true;
@@ -140,6 +165,8 @@ public class Tarefa {
                 ", proposta='" + proposta + '\'' +
                 ", inicio=" + inicio +
                 ", fim=" + fim +
+                ", criadoEm=" + criadoEm +
+                ", respostas=" + respostas +
                 '}';
     }
 }

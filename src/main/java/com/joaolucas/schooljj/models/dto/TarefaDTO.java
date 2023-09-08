@@ -1,8 +1,10 @@
 package com.joaolucas.schooljj.models.dto;
 
+import com.joaolucas.schooljj.models.entities.Resposta;
 import com.joaolucas.schooljj.models.entities.Tarefa;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 public class TarefaDTO {
 
@@ -14,6 +16,8 @@ public class TarefaDTO {
     private String proposta;
     private LocalDateTime inicio;
     private LocalDateTime fim;
+    private LocalDateTime criadoEm;
+    private List<Long> respostasId;
 
     public TarefaDTO(){
 
@@ -28,6 +32,8 @@ public class TarefaDTO {
         setProposta(tarefa.getProposta());
         setInicio(tarefa.getInicio());
         setFim(tarefa.getFim());
+        setCriadoEm(tarefa.getCriadoEm());
+        setRespostasId(tarefa.getRespostas().stream().map(Resposta::getId).toList());
     }
 
     public Long getId() {
@@ -92,5 +98,21 @@ public class TarefaDTO {
 
     public void setFim(LocalDateTime fim) {
         this.fim = fim;
+    }
+
+    public LocalDateTime getCriadoEm() {
+        return criadoEm;
+    }
+
+    public void setCriadoEm(LocalDateTime criadoEm) {
+        this.criadoEm = criadoEm;
+    }
+
+    public List<Long> getRespostasId() {
+        return respostasId;
+    }
+
+    public void setRespostasId(List<Long> respostasId) {
+        this.respostasId = respostasId;
     }
 }

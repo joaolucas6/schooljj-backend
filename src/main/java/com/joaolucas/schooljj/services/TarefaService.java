@@ -15,6 +15,7 @@ import com.joaolucas.schooljj.utils.DataValidation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -48,6 +49,7 @@ public class TarefaService {
         tarefa.setProposta(tarefaDTO.getProposta());
         tarefa.setInicio(tarefaDTO.getInicio());
         tarefa.setFim(tarefaDTO.getFim());
+        tarefa.setCriadoEm(LocalDateTime.now());
 
         Tarefa savedTarefa = tarefaRepository.save(tarefa);
 
