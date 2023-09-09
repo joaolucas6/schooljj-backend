@@ -14,10 +14,10 @@ public class Disciplina {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "nome")
+    @Column(name = "nome", length = 35)
     private String nome;
 
-    @Column(name = "descricao")
+    @Column(name = "descricao", length = 500)
     private String descricao;
 
     @ManyToMany

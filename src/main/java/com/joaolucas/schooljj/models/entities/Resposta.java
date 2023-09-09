@@ -30,7 +30,7 @@ public class Resposta {
     @Column(name = "data_criacao")
     private LocalDateTime dataCriacao;
 
-    @Column(name = "texto")
+    @Column(name = "texto", length = 3000)
     private String texto;
 
     @ElementCollection

@@ -16,16 +16,16 @@ public abstract class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
-    @Column(name = "nome")
+    @Column(name = "nome", length = 50)
     private String nome;
 
-    @Column(name = "sobrenome")
+    @Column(name = "sobrenome", length = 50)
     private String sobrenome;
 
     @Column(name = "email")
     private String email;
 
-    @Column(name = "senha")
+    @Column(name = "senha", length = 50)
     private String senha;
 
     @Enumerated(EnumType.STRING)
@@ -37,7 +37,7 @@ public abstract class User {
     @Column(name = "data_nascimento")
     private LocalDate dataNascimento;
 
-    @Column(name = "numero_telefone")
+    @Column(name = "numero_telefone", length = 9)
     private String numeroTelefone;
 
     public User(){

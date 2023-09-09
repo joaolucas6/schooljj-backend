@@ -27,10 +27,10 @@ public class Tarefa {
     @JoinColumn(name = "turma_id")
     private Turma turma;
 
-    @Column(name = "titulo")
+    @Column(name = "titulo", length = 200)
     private String titulo;
 
-    @Column(name = "proposta")
+    @Column(name = "proposta", length = 1300)
     private String proposta;
 
     @Column(name = "inicio")

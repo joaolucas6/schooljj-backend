@@ -23,7 +23,7 @@ public class Nota {
     @JoinColumn(name = "professor_id")
     private Professor professor;
 
-    @Column(name = "observacoes")
+    @Column(name = "observacoes", length = 3000)
     private String observacoes;
 
     @Column(name = "data_criacao")
