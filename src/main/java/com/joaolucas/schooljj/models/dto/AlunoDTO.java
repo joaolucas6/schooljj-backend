@@ -13,7 +13,6 @@ public class AlunoDTO {
     private String nome;
     private String sobrenome;
     private String email;
-    private String senha;
     private Genero genero;
     private String cpf;
     private LocalDate dataNascimento;
@@ -30,7 +29,6 @@ public class AlunoDTO {
         setNome(aluno.getNome());
         setSobrenome(aluno.getSobrenome());
         setEmail(aluno.getEmail());
-        setSenha(aluno.getSenha());
         setGenero(aluno.getGenero());
         setCpf(aluno.getCpf());
         setDataNascimento(aluno.getDataNascimento());
@@ -69,14 +67,6 @@ public class AlunoDTO {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public String getSenha() {
-        return senha;
-    }
-
-    public void setSenha(String senha) {
-        this.senha = senha;
     }
 
     public Genero getGenero() {

@@ -12,7 +12,6 @@ public class ProfessorDTO {
     private String nome;
     private String sobrenome;
     private String email;
-    private String senha;
     private Genero genero;
     private String cpf;
     private LocalDate dataNascimento;
@@ -31,7 +30,6 @@ public class ProfessorDTO {
         setNome(professor.getNome());
         setSobrenome(professor.getSobrenome());
         setEmail(professor.getEmail());
-        setSenha(professor.getSenha());
         setGenero(professor.getGenero());
         setCpf(professor.getCpf());
         setDataNascimento(professor.getDataNascimento());
@@ -72,14 +70,6 @@ public class ProfessorDTO {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public String getSenha() {
-        return senha;
-    }
-
-    public void setSenha(String senha) {
-        this.senha = senha;
     }
 
     public Genero getGenero() {
