@@ -1,6 +1,7 @@
 package com.joaolucas.schooljj.models.entities;
 
 import com.joaolucas.schooljj.models.enums.Genero;
+import com.joaolucas.schooljj.models.enums.Role;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
@@ -40,11 +41,14 @@ public abstract class User {
     @Column(name = "numero_telefone", length = 9)
     private String numeroTelefone;
 
+    @Enumerated(EnumType.STRING)
+    private Role role;
+
     public User(){
 
     }
 
-    public User(Long id, String nome, String sobrenome, String email, String senha, Genero genero, String cpf, LocalDate dataNascimento, String numeroTelefone) {
+    public User(Long id, String nome, String sobrenome, String email, String senha, Genero genero, String cpf, LocalDate dataNascimento, String numeroTelefone, Role role) {
         this.id = id;
         this.nome = nome;
         this.sobrenome = sobrenome;
@@ -54,6 +58,7 @@ public abstract class User {
         this.cpf = cpf;
         this.dataNascimento = dataNascimento;
         this.numeroTelefone = numeroTelefone;
+        this.role = role;
     }
 
     public Long getId() {
@@ -128,6 +133,14 @@ public abstract class User {
         this.numeroTelefone = numeroTelefone;
     }
 
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
+    }
+
     @Override
     public boolean equals(Object object) {
         if (this == object) return true;
@@ -153,6 +166,7 @@ public abstract class User {
                 ", cpf='" + cpf + '\'' +
                 ", dataNascimento=" + dataNascimento +
                 ", numeroTelefone='" + numeroTelefone + '\'' +
+                ", role=" + role +
                 '}';
     }
 }
