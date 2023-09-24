@@ -28,7 +28,7 @@ public class Disciplina {
     )
     private List<Professor> professores = new ArrayList<>();
 
-    @OneToMany(mappedBy = "disciplina")
+    @OneToMany(mappedBy = "disciplina", cascade = CascadeType.REMOVE)
     private List<Tarefa> tarefas = new ArrayList<>();
 
     public Disciplina(){

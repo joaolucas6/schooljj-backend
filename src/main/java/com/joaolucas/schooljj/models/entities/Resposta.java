@@ -19,7 +19,7 @@ public class Resposta {
     @JoinColumn(name = "tarefa_id")
     private Tarefa tarefa;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.REMOVE)
     @JoinColumn(name = "nota_id")
     private Nota nota;
 

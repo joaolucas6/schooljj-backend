@@ -3,10 +3,7 @@ package com.joaolucas.schooljj.models.entities;
 
 import com.joaolucas.schooljj.models.enums.Genero;
 import com.joaolucas.schooljj.models.enums.Role;
-import jakarta.persistence.DiscriminatorValue;
-import jakarta.persistence.Entity;
-import jakarta.persistence.ManyToMany;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.*;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -22,10 +19,10 @@ public class Professor extends User {
     @ManyToMany(mappedBy = "professores")
     private List<Turma> turmas = new ArrayList<>();
 
-    @OneToMany(mappedBy = "professor")
+    @OneToMany(mappedBy = "professor", cascade = CascadeType.REMOVE)
     private List<Tarefa> tarefas = new ArrayList<>();
 
-    @OneToMany(mappedBy = "professor")
+    @OneToMany(mappedBy = "professor", cascade = CascadeType.REMOVE)
     private List<Nota> notas = new ArrayList<>();
 
     public Professor() {

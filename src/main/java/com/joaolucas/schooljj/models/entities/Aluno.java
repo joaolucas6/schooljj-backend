@@ -16,7 +16,7 @@ public class Aluno extends User {
     @JoinColumn(name = "turma_id")
     private Turma turma;
 
-    @OneToMany(mappedBy = "aluno")
+    @OneToMany(mappedBy = "aluno", cascade = CascadeType.REMOVE)
     private List<Resposta> respostas = new ArrayList<>();
 
     public Aluno(){

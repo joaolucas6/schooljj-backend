@@ -28,7 +28,7 @@ public class Turma {
     @OneToMany(mappedBy = "turma")
     private List<Aluno> alunos = new ArrayList<>();
 
-    @OneToMany(mappedBy = "turma")
+    @OneToMany(mappedBy = "turma", cascade = CascadeType.REMOVE)
     private List<Tarefa> tarefas = new ArrayList<>();
 
     public Turma(){

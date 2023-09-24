@@ -42,7 +42,7 @@ public class Tarefa {
     @Column(name = "criado_em")
     private LocalDateTime criadoEm;
 
-    @OneToMany(mappedBy = "tarefa")
+    @OneToMany(mappedBy = "tarefa", cascade = CascadeType.REMOVE)
     private List<Resposta> respostas = new ArrayList<>();
 
     public Tarefa(){
