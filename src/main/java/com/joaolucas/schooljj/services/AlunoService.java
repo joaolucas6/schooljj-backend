@@ -34,7 +34,7 @@ public class AlunoService {
         if(alunoDTO.getEmail() != null) aluno.setEmail(alunoDTO.getEmail());
         if(alunoDTO.getGenero() != null) aluno.setGenero(alunoDTO.getGenero());
         if(alunoDTO.getCpf() != null) aluno.setCpf(alunoDTO.getCpf());
-        if(alunoDTO.getDataNascimento() != null) aluno.setDataNascimento(aluno.getDataNascimento());
+        if(alunoDTO.getDataNascimento() != null) aluno.setDataNascimento(alunoDTO.getDataNascimento());
         if(alunoDTO.getNumeroTelefone() != null) aluno.setNumeroTelefone(alunoDTO.getNumeroTelefone());
 
         return new AlunoDTO(alunoRepository.save(aluno));

@@ -35,6 +35,18 @@ public class DataValidation {
         return true;
     }
 
+    public static boolean isUserDataValid(AdminDTO adminDTO){
+        if(isAllFieldsNull(adminDTO)) return false;
+        if(adminDTO.getNome().isBlank() || adminDTO.getNome().length() > 50) return false;
+        if(adminDTO.getSobrenome().isBlank() || adminDTO.getSobrenome().length() > 50) return false;
+        if(!isEmailValid(adminDTO.getEmail())) return false;
+        if(!isCpfValid(adminDTO.getCpf())) return false;
+        if(adminDTO.getDataNascimento().isAfter(LocalDate.now())) return false;
+        if(adminDTO.getNumeroTelefone().length() != 9 || adminDTO.getNumeroTelefone().isBlank()) return false;
+
+        return true;
+    }
+
     public static boolean isDisciplinaDataValid(DisciplinaDTO disciplinaDTO){
         if(isAllFieldsNull(disciplinaDTO)) return false;
         if(disciplinaDTO.getNome().isBlank() || disciplinaDTO.getNome().length() > 35) return false;
