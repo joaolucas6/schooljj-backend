@@ -14,7 +14,7 @@ import java.util.Date;
 @RequiredArgsConstructor
 public class JwtService {
 
-    @Value("${application.security.jwt.expiration}")
+    @Value("${application.security.jwt.secret-key}")
     private String SECRET_KEY;
 
     @Value("${application.security.jwt.expiration}")
