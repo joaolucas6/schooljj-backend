@@ -5,6 +5,7 @@ import com.auth0.jwt.algorithms.Algorithm;
 import com.joaolucas.schooljj.models.entities.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -20,7 +21,7 @@ public class JwtService {
     @Value("${application.security.jwt.expiration}")
     private long expiration;
 
-    public <T extends User> String gerarToken(T user){
+    public String gerarToken(UserDetails user){
         return JWT
                 .create()
                 .withSubject(user.getUsername())
