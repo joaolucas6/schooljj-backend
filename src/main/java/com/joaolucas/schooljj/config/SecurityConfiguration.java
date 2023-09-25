@@ -3,6 +3,7 @@ package com.joaolucas.schooljj.config;
 import com.joaolucas.schooljj.services.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -30,8 +31,62 @@ public class SecurityConfiguration {
         return httpSecurity
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
-                    .requestMatchers("/api/v1/auth/**")
-                    .permitAll()
+
+                    .requestMatchers("/api/v1/autenticacao/**")
+                    .hasRole("ADMINISTRADOR")
+
+                    .requestMatchers("/api/v1/turmas/**")
+                    .hasRole("ADMINISTRADOR")
+
+
+                    .requestMatchers(HttpMethod.GET, "/api/v1/tarefas")
+                    .authenticated()
+
+                    .requestMatchers(HttpMethod.POST, "/api/v1/tarefas")
+                    .hasAnyRole("PROFESSOR", "ADMINISTRADOR")
+
+                    .requestMatchers(HttpMethod.PUT, "/api/v1/tarefas")
+                    .hasAnyRole("PROFESSOR", "ADMINISTRADOR")
+
+                    .requestMatchers(HttpMethod.DELETE, "/api/v1/tarefas")
+                    .hasAnyRole("PROFESSOR", "ADMINISTRADOR")
+
+                    .requestMatchers(HttpMethod.PUT, "/api/v1/professores")
+                    .hasRole("ADMINISTRADOR")
+
+                    .requestMatchers(HttpMethod.DELETE, "/api/v1/professores")
+                    .hasRole("ADMINISTRADOR")
+
+
+
+                    .requestMatchers(HttpMethod.POST, "/api/v1/notas")
+                    .hasAnyRole("PROFESSOR", "ADMINISTRADOR")
+
+                    .requestMatchers(HttpMethod.PUT, "/api/v1/notas")
+                    .hasAnyRole("PROFESSOR", "ADMINISTRADOR")
+
+                    .requestMatchers(HttpMethod.DELETE, "/api/v1/notas")
+                    .hasAnyRole("PROFESSOR", "ADMINISTRADOR")
+
+
+                    .requestMatchers(HttpMethod.POST, "/api/v1/disciplinas")
+                    .hasRole("ADMINISTRADOR")
+
+                    .requestMatchers(HttpMethod.PUT, "/api/v1/disciplinas")
+                    .hasRole("ADMINISTRADOR")
+
+                    .requestMatchers(HttpMethod.DELETE, "/api/v1/disciplinas")
+                    .hasRole("ADMINISTRADOR")
+
+                    .requestMatchers(HttpMethod.PUT, "/api/v1/alunos")
+                    .hasRole("ADMINISTRADOR")
+
+                    .requestMatchers(HttpMethod.DELETE, "/api/v1/alunos")
+                    .hasRole("ADMINISTRADOR")
+
+                    .requestMatchers("/api/v1/admins/**")
+                    .hasRole("ADMINISTRADOR")
+
                     .anyRequest()
                     .authenticated()
                 )
