@@ -37,6 +37,7 @@ public class TarefaService {
 
     public TarefaDTO criar(TarefaDTO tarefaDTO){
         if(!DataValidation.isTarefaDataValid(tarefaDTO)) throw new BadRequestException("Dados da tarefa são inválidos.");
+
         Disciplina disciplina = disciplinaRepository.findById(tarefaDTO.getDisciplinaId()).orElseThrow(() -> new ResourceNotFoundException("Disciplina não foi encontrada com ID: " + tarefaDTO.getDisciplinaId()));
         Professor professor = professorRepository.findById(tarefaDTO.getProfessorId()).orElseThrow(() -> new ResourceNotFoundException("Professor não foi encontrado com ID: " + tarefaDTO.getProfessorId()));
         Turma turma = turmaRepository.findById(tarefaDTO.getTurmaId()).orElseThrow(() -> new ResourceNotFoundException("Turma não foi encontrada com ID: " + tarefaDTO.getTurmaId()));
@@ -49,7 +50,7 @@ public class TarefaService {
         tarefa.setProposta(tarefaDTO.getProposta());
         tarefa.setInicio(tarefaDTO.getInicio());
         tarefa.setFim(tarefaDTO.getFim());
-        tarefa.setCriadoEm(LocalDateTime.now());
+        tarefa.setCriadoEm(tarefaDTO.getCriadoEm());
 
         Tarefa savedTarefa = tarefaRepository.save(tarefa);
 

@@ -5,6 +5,7 @@ import com.joaolucas.schooljj.models.entities.Tarefa;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Objects;
 
 public class TarefaDTO {
 
@@ -25,9 +26,9 @@ public class TarefaDTO {
 
     public TarefaDTO(Tarefa tarefa){
         setId(tarefa.getId());
-        setProfessorId(tarefa.getProfessor().getId());
-        setDisciplinaId(tarefa.getDisciplina().getId());
-        setTurmaId(tarefa.getTurma().getId());
+        if(tarefa.getProfessor() != null) setProfessorId(tarefa.getProfessor().getId());
+        if(tarefa.getDisciplina() != null) setDisciplinaId(tarefa.getDisciplina().getId());
+        if(tarefa.getTurma() != null) setTurmaId(tarefa.getTurma().getId());
         setTitulo(tarefa.getTitulo());
         setProposta(tarefa.getProposta());
         setInicio(tarefa.getInicio());
@@ -114,5 +115,18 @@ public class TarefaDTO {
 
     public void setRespostasId(List<Long> respostasId) {
         this.respostasId = respostasId;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        TarefaDTO tarefaDTO = (TarefaDTO) o;
+        return Objects.equals(id, tarefaDTO.id) && Objects.equals(professorId, tarefaDTO.professorId) && Objects.equals(disciplinaId, tarefaDTO.disciplinaId) && Objects.equals(turmaId, tarefaDTO.turmaId) && Objects.equals(titulo, tarefaDTO.titulo) && Objects.equals(proposta, tarefaDTO.proposta) && Objects.equals(inicio, tarefaDTO.inicio) && Objects.equals(fim, tarefaDTO.fim) && Objects.equals(criadoEm, tarefaDTO.criadoEm) && Objects.equals(respostasId, tarefaDTO.respostasId);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, professorId, disciplinaId, turmaId, titulo, proposta, inicio, fim, criadoEm, respostasId);
     }
 }

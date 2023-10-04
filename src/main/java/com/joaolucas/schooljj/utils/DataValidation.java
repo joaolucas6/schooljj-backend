@@ -70,10 +70,10 @@ public class DataValidation {
 
     public static boolean isTarefaDataValid(TarefaDTO tarefaDTO){
         if(isAllFieldsNull(tarefaDTO)) return false;
-        if(tarefaDTO.getTitulo().isBlank() || tarefaDTO.getTitulo().length() > 200) return false;
-        if(tarefaDTO.getProposta().isBlank() || tarefaDTO.getProposta().length() > 1300) return false;
-        if(tarefaDTO.getInicio().isAfter(tarefaDTO.getFim())) return false;
-        if(tarefaDTO.getFim().isBefore(LocalDateTime.now())) return false;
+        if(tarefaDTO.getTitulo() != null && tarefaDTO.getTitulo().isBlank() || tarefaDTO.getTitulo() != null && tarefaDTO.getTitulo().length() > 200) return false;
+        if(tarefaDTO.getProposta() != null && tarefaDTO.getProposta().isBlank() || tarefaDTO.getProposta() != null && tarefaDTO.getProposta().length() > 1300) return false;
+        if(tarefaDTO.getInicio() != null && tarefaDTO.getInicio().isAfter(tarefaDTO.getFim())) return false;
+        if(tarefaDTO.getFim() != null && tarefaDTO.getFim().isBefore(LocalDateTime.now())) return false;
 
         return true;
     }
