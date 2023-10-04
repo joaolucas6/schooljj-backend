@@ -7,6 +7,7 @@ import com.joaolucas.schooljj.models.entities.Turma;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class TurmaDTO {
 
@@ -62,5 +63,18 @@ public class TurmaDTO {
 
     public void setTarefasId(List<Long> tarefasId) {
         this.tarefasId = tarefasId;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        TurmaDTO turmaDTO = (TurmaDTO) o;
+        return Objects.equals(id, turmaDTO.id) && Objects.equals(nome, turmaDTO.nome) && Objects.equals(professoresId, turmaDTO.professoresId) && Objects.equals(alunosId, turmaDTO.alunosId) && Objects.equals(tarefasId, turmaDTO.tarefasId);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, nome, professoresId, alunosId, tarefasId);
     }
 }

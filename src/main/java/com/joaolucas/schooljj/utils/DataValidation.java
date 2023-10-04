@@ -80,7 +80,7 @@ public class DataValidation {
 
     public static boolean isTurmaDataValid(TurmaDTO turmaDTO){
         if(isAllFieldsNull(turmaDTO)) return false;
-        if(turmaDTO.getNome().isBlank() || turmaDTO.getNome().length() > 50) return false;
+        if(turmaDTO.getNome() != null && turmaDTO.getNome().isBlank() || turmaDTO.getNome() != null &&  turmaDTO.getNome().length() > 50) return false;
 
         return true;
     }

@@ -61,13 +61,16 @@ public class TurmaService {
         Aluno aluno = alunoRepository.findById(alunoId).orElseThrow(() -> new ResourceNotFoundException("Aluno não foi encontrado com ID: "+ alunoId));
 
 
-        Turma antigaTurma = aluno.getTurma();
+        if(aluno.getTurma() != null){
+            Turma antigaTurma = aluno.getTurma();
+            antigaTurma.getAlunos().remove(aluno);
+            turmaRepository.save(antigaTurma);
+        }
 
-        antigaTurma.getAlunos().remove(aluno);
         turma.getAlunos().add(aluno);
         aluno.setTurma(turma);
 
-        turmaRepository.saveAll(List.of(antigaTurma, turma));
+        turmaRepository.save(turma);
         alunoRepository.save(aluno);
     }
 
