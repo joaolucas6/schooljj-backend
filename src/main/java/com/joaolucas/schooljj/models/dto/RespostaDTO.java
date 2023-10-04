@@ -5,6 +5,7 @@ import com.joaolucas.schooljj.models.entities.Resposta;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class RespostaDTO {
 
@@ -18,9 +19,9 @@ public class RespostaDTO {
 
     public RespostaDTO(Resposta resposta){
         setId(resposta.getId());
-        setTarefaId(resposta.getTarefa().getId());
-        setNotaId(resposta.getNota().getId());
-        setAlunoId(resposta.getAluno().getId());
+        if(resposta.getTarefa() != null) setTarefaId(resposta.getTarefa().getId());
+        if(resposta.getNota() != null) setNotaId(resposta.getNota().getId());
+        if(resposta.getAluno() != null) setAlunoId(resposta.getAluno().getId());
         setDataCriacao(resposta.getDataCriacao());
         setTexto(resposta.getTexto());
         setImagensUrl(resposta.getImagensUrl());
@@ -80,5 +81,18 @@ public class RespostaDTO {
 
     public void setImagensUrl(List<String> imagensUrl) {
         this.imagensUrl = imagensUrl;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        RespostaDTO that = (RespostaDTO) o;
+        return Objects.equals(id, that.id) && Objects.equals(tarefaId, that.tarefaId) && Objects.equals(notaId, that.notaId) && Objects.equals(alunoId, that.alunoId) && Objects.equals(dataCriacao, that.dataCriacao) && Objects.equals(texto, that.texto) && Objects.equals(imagensUrl, that.imagensUrl);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, tarefaId, notaId, alunoId, dataCriacao, texto, imagensUrl);
     }
 }

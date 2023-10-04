@@ -63,7 +63,7 @@ public class DataValidation {
 
     public static boolean isRespostaDataValid(RespostaDTO respostaDTO){
         if(isAllFieldsNull(respostaDTO)) return false;
-        if(respostaDTO.getTexto().isBlank() || respostaDTO.getTexto().length() > 3000) return false;
+        if(respostaDTO.getTexto() != null && respostaDTO.getTexto().isBlank() || respostaDTO.getTexto() != null &&  respostaDTO.getTexto().length() > 3000) return false;
 
         return true;
     }
