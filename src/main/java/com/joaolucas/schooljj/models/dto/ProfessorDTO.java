@@ -5,6 +5,7 @@ import com.joaolucas.schooljj.models.enums.Genero;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Objects;
 
 public class ProfessorDTO {
 
@@ -134,5 +135,18 @@ public class ProfessorDTO {
 
     public void setNotasId(List<Long> notasId) {
         this.notasId = notasId;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ProfessorDTO that = (ProfessorDTO) o;
+        return Objects.equals(id, that.id) && Objects.equals(nome, that.nome) && Objects.equals(sobrenome, that.sobrenome) && Objects.equals(email, that.email) && genero == that.genero && Objects.equals(cpf, that.cpf) && Objects.equals(dataNascimento, that.dataNascimento) && Objects.equals(numeroTelefone, that.numeroTelefone) && Objects.equals(disciplinasId, that.disciplinasId) && Objects.equals(turmasId, that.turmasId) && Objects.equals(tarefasId, that.tarefasId) && Objects.equals(notasId, that.notasId);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, nome, sobrenome, email, genero, cpf, dataNascimento, numeroTelefone, disciplinasId, turmasId, tarefasId, notasId);
     }
 }
