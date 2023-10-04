@@ -44,7 +44,7 @@ public class NotaService {
         nota.setResposta(resposta);
         nota.setProfessor(professor);
         nota.setObservacoes(notaDTO.getObservacoes());
-        nota.setDataCriacao(LocalDateTime.now());
+        nota.setDataCriacao(notaDTO.getDataCriacao());
 
         Nota savedNota = notaRepository.save(nota);
 

@@ -3,6 +3,7 @@ package com.joaolucas.schooljj.models.dto;
 import com.joaolucas.schooljj.models.entities.Nota;
 
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 public class NotaDTO {
 
@@ -16,8 +17,8 @@ public class NotaDTO {
     public NotaDTO(Nota nota){
         setId(nota.getId());
         setNota(nota.getNota());
-        setRespostaId(nota.getResposta().getId());
-        setProfessorId(nota.getProfessor().getId());
+        if(nota.getResposta() != null) setRespostaId(nota.getResposta().getId());
+        if(nota.getProfessor() != null) setProfessorId(nota.getProfessor().getId());
         setObservacoes(nota.getObservacoes());
         setDataCriacao(nota.getDataCriacao());
     }
@@ -68,5 +69,18 @@ public class NotaDTO {
 
     public void setDataCriacao(LocalDateTime dataCriacao) {
         this.dataCriacao = dataCriacao;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        NotaDTO notaDTO = (NotaDTO) o;
+        return Objects.equals(id, notaDTO.id) && Objects.equals(nota, notaDTO.nota) && Objects.equals(respostaId, notaDTO.respostaId) && Objects.equals(professorId, notaDTO.professorId) && Objects.equals(observacoes, notaDTO.observacoes) && Objects.equals(dataCriacao, notaDTO.dataCriacao);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, nota, respostaId, professorId, observacoes, dataCriacao);
     }
 }

@@ -56,8 +56,8 @@ public class DataValidation {
 
     public static boolean isNotaDataValid(NotaDTO notaDTO){
         if(isAllFieldsNull(notaDTO)) return false;
-        if(notaDTO.getNota() < 0 || notaDTO.getNota() > 10) return false;
-        if(notaDTO.getObservacoes().isBlank() || notaDTO.getObservacoes().length() > 3000) return false;
+        if(notaDTO.getNota() != null && notaDTO.getNota() < 0 || notaDTO.getNota() != null && notaDTO.getNota() > 10) return false;
+        if(notaDTO.getObservacoes() != null && notaDTO.getObservacoes().isBlank() || notaDTO.getObservacoes() != null && notaDTO.getObservacoes().length() > 3000) return false;
         return true;
     }
 
