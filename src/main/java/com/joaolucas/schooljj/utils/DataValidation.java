@@ -37,12 +37,12 @@ public class DataValidation {
 
     public static boolean isUserDataValid(AdminDTO adminDTO){
         if(isAllFieldsNull(adminDTO)) return false;
-        if(adminDTO.getNome().isBlank() || adminDTO.getNome().length() > 50) return false;
-        if(adminDTO.getSobrenome().isBlank() || adminDTO.getSobrenome().length() > 50) return false;
-        if(!isEmailValid(adminDTO.getEmail())) return false;
-        if(!isCpfValid(adminDTO.getCpf())) return false;
-        if(adminDTO.getDataNascimento().isAfter(LocalDate.now())) return false;
-        if(adminDTO.getNumeroTelefone().length() != 9 || adminDTO.getNumeroTelefone().isBlank()) return false;
+        if(adminDTO.getNome() != null && adminDTO.getNome().isBlank() || adminDTO.getNome().length() > 50) return false;
+        if(adminDTO.getSobrenome() != null && adminDTO.getSobrenome().isBlank() || adminDTO.getSobrenome() != null && adminDTO.getSobrenome().length() > 50) return false;
+        if(adminDTO.getEmail() != null && !isEmailValid(adminDTO.getEmail())) return false;
+        if(adminDTO.getCpf() != null && !isCpfValid(adminDTO.getCpf())) return false;
+        if(adminDTO.getDataNascimento() != null && adminDTO.getDataNascimento().isAfter(LocalDate.now())) return false;
+        if(adminDTO.getNumeroTelefone() != null && adminDTO.getNumeroTelefone().length() != 9 || adminDTO.getNumeroTelefone() != null &&  adminDTO.getNumeroTelefone().isBlank()) return false;
 
         return true;
     }

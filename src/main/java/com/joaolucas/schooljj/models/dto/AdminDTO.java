@@ -4,6 +4,7 @@ import com.joaolucas.schooljj.models.entities.Admin;
 import com.joaolucas.schooljj.models.enums.Genero;
 
 import java.time.LocalDate;
+import java.util.Objects;
 
 public class AdminDTO {
     private Long id;
@@ -93,5 +94,18 @@ public class AdminDTO {
 
     public void setNumeroTelefone(String numeroTelefone) {
         this.numeroTelefone = numeroTelefone;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        AdminDTO adminDTO = (AdminDTO) o;
+        return Objects.equals(id, adminDTO.id) && Objects.equals(nome, adminDTO.nome) && Objects.equals(sobrenome, adminDTO.sobrenome) && Objects.equals(email, adminDTO.email) && genero == adminDTO.genero && Objects.equals(cpf, adminDTO.cpf) && Objects.equals(dataNascimento, adminDTO.dataNascimento) && Objects.equals(numeroTelefone, adminDTO.numeroTelefone);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, nome, sobrenome, email, genero, cpf, dataNascimento, numeroTelefone);
     }
 }
