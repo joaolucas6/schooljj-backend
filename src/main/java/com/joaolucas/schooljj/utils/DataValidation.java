@@ -49,8 +49,8 @@ public class DataValidation {
 
     public static boolean isDisciplinaDataValid(DisciplinaDTO disciplinaDTO){
         if(isAllFieldsNull(disciplinaDTO)) return false;
-        if(disciplinaDTO.getNome().isBlank() || disciplinaDTO.getNome().length() > 35) return false;
-        if(disciplinaDTO.getDescricao().length() > 500 || disciplinaDTO.getDescricao().isBlank()) return false;
+        if(disciplinaDTO.getNome() != null && disciplinaDTO.getNome().isBlank() || disciplinaDTO.getNome() != null && disciplinaDTO.getNome().length() > 35) return false;
+        if(disciplinaDTO.getDescricao() != null && disciplinaDTO.getDescricao().length() > 500 || disciplinaDTO.getDescricao() != null && disciplinaDTO.getDescricao().isBlank()) return false;
         return true;
     }
 
