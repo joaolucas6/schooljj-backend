@@ -6,6 +6,7 @@ import com.joaolucas.schooljj.models.enums.Genero;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Objects;
 
 public class AlunoDTO {
 
@@ -33,7 +34,7 @@ public class AlunoDTO {
         setCpf(aluno.getCpf());
         setDataNascimento(aluno.getDataNascimento());
         setNumeroTelefone(aluno.getNumeroTelefone());
-        setTurmaId(aluno.getTurma().getId());
+        if(aluno.getTurma() != null) setTurmaId(aluno.getTurma().getId());
         setRespostasId(aluno.getRespostas().stream().map(Resposta::getId).toList());
     }
 
@@ -115,5 +116,18 @@ public class AlunoDTO {
 
     public void setRespostasId(List<Long> respostasId) {
         this.respostasId = respostasId;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        AlunoDTO alunoDTO = (AlunoDTO) o;
+        return Objects.equals(id, alunoDTO.id) && Objects.equals(nome, alunoDTO.nome) && Objects.equals(sobrenome, alunoDTO.sobrenome) && Objects.equals(email, alunoDTO.email) && genero == alunoDTO.genero && Objects.equals(cpf, alunoDTO.cpf) && Objects.equals(dataNascimento, alunoDTO.dataNascimento) && Objects.equals(numeroTelefone, alunoDTO.numeroTelefone) && Objects.equals(turmaId, alunoDTO.turmaId) && Objects.equals(respostasId, alunoDTO.respostasId);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, nome, sobrenome, email, genero, cpf, dataNascimento, numeroTelefone, turmaId, respostasId);
     }
 }

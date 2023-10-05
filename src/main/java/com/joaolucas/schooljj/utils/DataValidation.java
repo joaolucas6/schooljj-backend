@@ -13,12 +13,12 @@ public class DataValidation {
 
     public static boolean isUserDataValid(AlunoDTO alunoDTO){
         if(isAllFieldsNull(alunoDTO)) return false;
-        if(alunoDTO.getNome().isBlank() || alunoDTO.getNome().length() > 50) return false;
-        if(alunoDTO.getSobrenome().isBlank() || alunoDTO.getSobrenome().length() > 50) return false;
-        if(!isEmailValid(alunoDTO.getEmail())) return false;
-        if(!isCpfValid(alunoDTO.getCpf())) return false;
-        if(alunoDTO.getDataNascimento().isAfter(LocalDate.now())) return false;
-        if(alunoDTO.getNumeroTelefone().length() != 9 || alunoDTO.getNumeroTelefone().isBlank()) return false;
+        if(alunoDTO.getNome() != null && alunoDTO.getNome().isBlank() || alunoDTO.getNome().length() > 50) return false;
+        if(alunoDTO.getSobrenome() != null && alunoDTO.getSobrenome().isBlank() || alunoDTO.getSobrenome() != null && alunoDTO.getSobrenome().length() > 50) return false;
+        if(alunoDTO.getEmail() != null && !isEmailValid(alunoDTO.getEmail())) return false;
+        if(alunoDTO.getCpf() != null && !isCpfValid(alunoDTO.getCpf())) return false;
+        if(alunoDTO.getDataNascimento() != null && alunoDTO.getDataNascimento().isAfter(LocalDate.now())) return false;
+        if(alunoDTO.getNumeroTelefone() != null && alunoDTO.getNumeroTelefone().length() != 9 || alunoDTO.getNumeroTelefone() != null &&  alunoDTO.getNumeroTelefone().isBlank()) return false;
 
         return true;
     }
